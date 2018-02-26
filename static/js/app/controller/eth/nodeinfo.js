@@ -8,6 +8,10 @@ define([
     function init() {
 		base.showLoading("加载中...");
 		getNodeinfo();
+		setInterval(function(){
+			base.showLoading("更新中...");
+			getNodeinfo()
+		},10000)
 	}
 	function getNodeinfo() {
         return Ajax.get("802901").then(function (res) {
@@ -23,10 +27,10 @@ define([
 				$('#scScanNumber').html('<samp>SC已扫描区块:  </samp>'+data.scScanNumber)
 				$('#scWalletBalance').html('<samp>SC钱包余额:  </samp>'+data.scWalletBalance)
 				$('#scWalletOpened').html('<samp>SC钱包是否打开:  </samp>'+data.scWalletOpened)
-				setInterval(function(){
-					base.showLoading("更新中...");
-					getNodeinfo()
-				},10000)
+				
+				$('#btcBlockNumber').html('<samp>BTC区块高度:  </samp>'+data.btcBlockNumber)
+				$('#btcScanNumber').html('<samp>BTC已扫描区块:  </samp>'+data.btcScanNumber)
+				
 	        } else {
 	        	base.showMsg(res.msg);
 	        }
